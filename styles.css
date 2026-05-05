@@ -1,0 +1,466 @@
+/* ============================================================
+   watomi · royal heraldic linktree
+   palette: cream / ivory / black / muted gold accent
+============================================================ */
+
+:root {
+  --bg: #f3ecd8;          /* aged ivory */
+  --bg-2: #ece2c5;        /* slightly warmer */
+  --ink: #1a1815;         /* deep ink black */
+  --ink-soft: #3a342b;    /* warm dark grey */
+  --ink-muted: #6b6253;   /* faded ink */
+  --gold: #8a6f33;        /* muted antique gold */
+  --gold-soft: #b89a55;
+  --rule: rgba(26, 24, 21, 0.18);
+  --card-bg: rgba(255, 252, 240, 0.6);
+  --shadow-soft: 0 1px 0 rgba(255, 255, 255, 0.6) inset,
+                 0 24px 40px -28px rgba(26, 24, 21, 0.4),
+                 0 8px 16px -12px rgba(26, 24, 21, 0.25);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  background: var(--bg);
+  background-image:
+    radial-gradient(ellipse at 50% 0%, #faf3df 0%, transparent 60%),
+    radial-gradient(ellipse at 50% 100%, #e6dcbf 0%, transparent 70%),
+    linear-gradient(#f3ecd8, #ebe1c5);
+  color: var(--ink);
+  font-family: "Cormorant Garamond", "EB Garamond", "Garamond", "Times New Roman", serif;
+  font-size: 18px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ----------- decorative full-page watermark (Austria-Hungary coat) ----------- */
+.watermark {
+  position: fixed;
+  inset: 0;
+  background-image: url("assets/coat-of-arms.jpg");
+  background-repeat: no-repeat;
+  background-position: center 58%;
+  background-size: min(900px, 95vw);
+  opacity: 0.045;
+  filter: contrast(1.4);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ----------- subtle paper grain ----------- */
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background-image:
+    radial-gradient(rgba(0,0,0,0.05) 1px, transparent 1px),
+    radial-gradient(rgba(0,0,0,0.04) 1px, transparent 1px);
+  background-size: 3px 3px, 7px 7px;
+  background-position: 0 0, 1px 2px;
+  mix-blend-mode: multiply;
+  opacity: 0.55;
+}
+
+/* ----------- main card ----------- */
+.card {
+  position: relative;
+  z-index: 2;
+  max-width: 480px;
+  width: 100%;
+  padding: 56px 36px 36px;
+  text-align: center;
+  background: var(--card-bg);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+/* ornamental double border */
+.card::before,
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  pointer-events: none;
+  border: 1px solid var(--rule);
+  border-radius: 1px;
+}
+.card::after {
+  inset: 11px;
+  border-color: rgba(26, 24, 21, 0.08);
+}
+
+/* ----------- crest at top ----------- */
+.crest {
+  position: relative;
+  margin: -8px auto 22px;
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.crest img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: brightness(0) saturate(100%);
+  opacity: 0.85;
+}
+
+/* ----------- avatar ----------- */
+.avatar-wrap {
+  position: relative;
+  width: 156px;
+  height: 156px;
+  margin: 0 auto 28px;
+}
+.avatar-ring {
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 1px solid rgba(26, 24, 21, 0.5);
+  box-shadow:
+    0 0 0 1px rgba(255, 252, 240, 0.6),
+    0 0 0 6px transparent,
+    0 0 0 7px rgba(26, 24, 21, 0.18),
+    inset 0 0 0 1px rgba(255, 252, 240, 0.4);
+}
+.avatar-ring::before,
+.avatar-ring::after {
+  content: "\2756";
+  position: absolute;
+  font-size: 14px;
+  color: var(--ink-soft);
+  background: var(--bg);
+  padding: 0 6px;
+  line-height: 1;
+}
+.avatar-ring::before {
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.avatar-ring::after {
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  filter: contrast(1.04) saturate(0.95);
+  box-shadow: 0 6px 20px -10px rgba(26, 24, 21, 0.4);
+}
+
+/* ----------- name ----------- */
+.name {
+  font-family: "Cinzel", "Cormorant Garamond", serif;
+  font-weight: 600;
+  font-size: clamp(36px, 8vw, 52px);
+  letter-spacing: 0.18em;
+  margin: 4px 0 12px;
+  color: var(--ink);
+  text-transform: lowercase;
+}
+
+/* ----------- divider ----------- */
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 6px auto 14px;
+  color: var(--ink-muted);
+}
+.divider-line {
+  flex: 1;
+  max-width: 70px;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(26, 24, 21, 0.5),
+    transparent
+  );
+}
+.divider-ornament {
+  font-size: 14px;
+  color: var(--ink-soft);
+  line-height: 1;
+}
+
+/* ----------- motto ----------- */
+.motto {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: clamp(18px, 4.4vw, 22px);
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  margin: 0 0 4px;
+}
+.motto em { font-style: italic; }
+.motto-tr {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 14px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin: 0 0 36px;
+}
+
+/* ----------- links ----------- */
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0 auto 36px;
+}
+.link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  background: rgba(255, 252, 240, 0.55);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  color: var(--ink);
+  text-decoration: none;
+  font-family: "Cormorant Garamond", serif;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.18s ease, box-shadow 0.18s ease,
+              background 0.18s ease, border-color 0.18s ease;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  font-size: inherit;
+}
+.link::before {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border: 1px solid rgba(26, 24, 21, 0.06);
+  border-radius: 1px;
+  pointer-events: none;
+  transition: border-color 0.18s ease;
+}
+.link:hover {
+  background: rgba(255, 252, 240, 0.85);
+  border-color: rgba(26, 24, 21, 0.4);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 14px -10px rgba(26, 24, 21, 0.4);
+}
+.link:hover::before {
+  border-color: rgba(26, 24, 21, 0.18);
+}
+.link:active { transform: translateY(0); }
+
+.link-button {
+  font: inherit;
+  background-color: rgba(255, 252, 240, 0.55);
+}
+
+.link-icon {
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  background: rgba(255, 252, 240, 0.65);
+  color: var(--ink);
+}
+.link-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.link-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+.link-title {
+  font-family: "Cinzel", serif;
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink);
+  line-height: 1.1;
+}
+.link-sub {
+  font-size: 14px;
+  color: var(--ink-muted);
+  font-style: italic;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.link-arrow {
+  color: var(--ink-muted);
+  font-size: 16px;
+  transition: transform 0.18s ease, color 0.18s ease;
+}
+.link:hover .link-arrow {
+  color: var(--ink);
+  transform: translate(2px, -2px);
+}
+
+/* ----------- copied toast ----------- */
+.copied-toast {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ink);
+  color: var(--bg);
+  font-family: "Cinzel", serif;
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+.link.copied .copied-toast {
+  opacity: 1;
+}
+
+/* ----------- footer ----------- */
+.foot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 4px;
+  color: var(--ink-muted);
+  font-family: "Cinzel", serif;
+  font-size: 11px;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+}
+.foot-line {
+  flex: 1;
+  max-width: 50px;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(26, 24, 21, 0.4),
+    transparent
+  );
+}
+
+/* ----------- responsive ----------- */
+@media (max-width: 480px) {
+  body { padding: 16px 12px; }
+  .card { padding: 40px 22px 26px; }
+  .avatar-wrap { width: 132px; height: 132px; }
+  .name { letter-spacing: 0.14em; }
+  .link-sub { font-size: 13px; }
+  .link-icon { flex-basis: 32px; width: 32px; height: 32px; }
+  .link-icon svg { width: 18px; height: 18px; }
+}
+
+/* ----------- music toggle ----------- */
+.music-toggle {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px 8px 8px;
+  background: rgba(255, 252, 240, 0.85);
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  color: var(--ink);
+  font-family: "Cinzel", serif;
+  font-size: 11px;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  box-shadow: 0 6px 18px -10px rgba(26, 24, 21, 0.35),
+              inset 0 0 0 1px rgba(255, 252, 240, 0.55);
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+.music-toggle:hover {
+  background: rgba(255, 252, 240, 1);
+  transform: translateY(-1px);
+}
+.music-toggle:active { transform: translateY(0); }
+
+.music-disc {
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink);
+  transition: color 0.2s ease;
+}
+.music-disc svg { width: 22px; height: 22px; }
+
+.music-label {
+  display: inline-block;
+  min-width: 36px;
+  text-align: left;
+}
+
+/* spin disc when playing */
+.music-toggle.is-playing .music-disc {
+  animation: spin 4.5s linear infinite;
+  color: var(--gold);
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@media (max-width: 480px) {
+  .music-toggle {
+    right: 14px;
+    bottom: 14px;
+    padding: 6px 12px 6px 6px;
+    font-size: 10px;
+  }
+  .music-disc { width: 22px; height: 22px; }
+  .music-disc svg { width: 18px; height: 18px; }
+  .music-label { min-width: 32px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link, .link-arrow, .copied-toast { transition: none; }
+  .music-toggle.is-playing .music-disc { animation: none; }
+}
